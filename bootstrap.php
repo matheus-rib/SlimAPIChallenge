@@ -22,6 +22,6 @@ $app = new \Slim\App($container);
 
 // Routes
 require_once 'src/routes/products.php';
-// require_once 'src/routes/customers.php';
+require_once 'src/routes/customers.php';
 
 $app->run();

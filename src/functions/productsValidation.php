@@ -7,12 +7,6 @@ function requestProductParamsValidation($data){
         "msg" => array()
     );
 
-    $mandatoryData = array(
-        "price",
-        "sku",
-        "name"
-    );
-
     if(!array_key_exists('price', $data)){
         $validation['status'] = false;
         $validation['msg'][] = "Please inform a Price";

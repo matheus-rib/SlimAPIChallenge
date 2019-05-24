@@ -4,13 +4,11 @@ namespace src\routes;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\QueryException;
-use \App\Models\Customers;
-
-$app = new \Slim\App;
+use \App\Models\Customer;
 
 $app->post('/v1/customers', function(Request $request, Response $response){
     $requestedData = $request->getParsedBody();
-    $validation = requestCustomerParamsValidation($requestedData);
+    $validation = requestCustomersParamsValidation($requestedData);
     if($validation['status']){
         try{
             $customer = new Customer();
