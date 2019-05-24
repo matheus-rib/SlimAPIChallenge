@@ -20,7 +20,8 @@ $container['db'];
 
 $app = new \Slim\App($container);
 
-// Products Routes
-require 'src/routes/products.php';
+// Routes
+require_once 'src/routes/products.php';
+// require_once 'src/routes/customers.php';
 
 $app->run();

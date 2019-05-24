@@ -11,7 +11,8 @@
             "App\\": "src/"
         },
         "files":[
-            "src/functions/productsValidation.php"
+            "src/functions/productsValidation.php",
+            "src/functions/customersValidation.php"
         ]
     }
 }
