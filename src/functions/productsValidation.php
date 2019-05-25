@@ -1,29 +1,29 @@
 <?php
 use \App\Models\Product;
 
-function requestProductParamsValidation($data){
+function productValidation($data){
+    // Basic validation return schema
     $validation = array(
         "status" => true,
         "msg" => array()
     );
-
-    if(!array_key_exists('price', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a Price";
-    }
-
-    if(!array_key_exists('sku', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a SKU";
-    }
-
-    if(!array_key_exists('name', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a Name";
-    }
     
-    
-    foreach($data AS $param => $value){
+    // Required fields to insert a new product
+    $requiredFields = array(
+        'price' => 'Price',
+        'sku' => 'SKU',
+        'name' => 'Name'
+    );
+
+    foreach($requiredFields as $key => $value){
+        if(!array_key_exists($key, $data)){
+            $validation['status'] = false;
+            $validation['msg'][] = "Please inform a $value";
+        }
+    }
+
+    // General Validations
+    foreach($data as $param => $value){
         switch($param){
             case 'price':
                 if(!is_float($value) || $value <= 0){

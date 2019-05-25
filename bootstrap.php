@@ -1,9 +1,7 @@
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-
 require 'vendor/autoload.php';
 
+// Load DB Settings
 $settings = require 'config/settings.php';
 $container = new \Slim\Container($settings);
 
@@ -23,5 +21,6 @@ $app = new \Slim\App($container);
 // Routes
 require_once 'src/routes/products.php';
 require_once 'src/routes/customers.php';
+require_once 'src/routes/orders.php';
 
 $app->run();

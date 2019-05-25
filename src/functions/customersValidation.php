@@ -1,6 +1,7 @@
 <?php
 use \App\Models\Customer;
 
+// CPF Validation found in internet
 function CPFValidation($cpf){
     if(empty($cpf)) {
         return false;
@@ -37,28 +38,29 @@ function CPFValidation($cpf){
     }
 }
 
-function requestCustomersParamsValidation($data){
+function customerValidation($data){
+    // Basic validation return schema
     $validation = array(
         "status" => true,
         "msg" => array()
     );
 
-    if(!array_key_exists('cpf', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a CPF";
+    // Required fields to insert a new customer
+    $requiredFields = array(
+        'cpf' => 'CPF',
+        'name' => 'Name',
+        'email' => 'Email'
+    );
+
+    foreach($requiredFields as $key => $value){
+        if(!array_key_exists($key, $data)){
+            $validation['status'] = false;
+            $validation['msg'][] = "Please inform a $value";
+        }
     }
 
-    if(!array_key_exists('name', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a Name";
-    }
-
-    if(!array_key_exists('email', $data)){
-        $validation['status'] = false;
-        $validation['msg'][] = "Please inform a Email";
-    }
-
-    foreach($data AS $param => $value){
+    // General Validations
+    foreach($data as $param => $value){
         switch($param){
             case 'cpf':
                 if(!CPFValidation($value)){

@@ -6,14 +6,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\QueryException;
 use \App\Models\Product;
 
+// List all products
 $app->get('/v1/products', function(Request $resquest, Response $response){
     $product = Product::all();
     return $response->withJson($product);
 });
 
+// Insert a new product
 $app->post('/v1/products', function(Request $request, Response $response){
     $requestedData = $request->getParsedBody();
-    $validation = requestProductParamsValidation($requestedData);
+    $validation = productValidation($requestedData);
     if($validation['status']){
         try{
             $product = new Product();

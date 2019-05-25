@@ -6,9 +6,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\QueryException;
 use \App\Models\Customer;
 
+// List all Customers
+$app->get('/v1/customers', function(Request $resquest, Response $response){
+    $product = Customer::all();
+    return $response->withJson($product);
+});
+
+// Insert a new customer
 $app->post('/v1/customers', function(Request $request, Response $response){
     $requestedData = $request->getParsedBody();
-    $validation = requestCustomersParamsValidation($requestedData);
+    $validation = customerValidation($requestedData);
     if($validation['status']){
         try{
             $customer = new Customer();

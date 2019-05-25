@@ -1,4 +1,5 @@
 <?php
+// Load .env file settings
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/../');
 $dotenv->load();
 

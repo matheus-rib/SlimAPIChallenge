@@ -12,7 +12,8 @@
         },
         "files":[
             "src/functions/productsValidation.php",
-            "src/functions/customersValidation.php"
+            "src/functions/customersValidation.php",
+            "src/functions/ordersValidation.php"
         ]
     }
 }
