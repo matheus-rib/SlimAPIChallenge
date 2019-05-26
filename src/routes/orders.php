@@ -65,7 +65,7 @@ $app->post('/v1/orders', function(Request $request, Response $response){
             $order->status = $requestedData['status'];
             $order->total = $requestedData['total'];
             $order->customer_id = $customerId;
-            $order->cancelDate = date('Y-m-d H:i:s');
+            $order->cancelDate = null;
             $order->save();
     
             // Insert order_items for the Order
@@ -97,6 +97,7 @@ $app->put('/v1/orders/{id}', function(Request $request, Response $response){
         try{
             $order = Order::find($orderId);
             $order->status = $orderStatus;
+            $order->cancelDate = date('Y-m-d H:i:s');
             $order->update();
             return $response->withJson(["msg" => "Order canceled successfully"]);
         }catch(QueryException $e){

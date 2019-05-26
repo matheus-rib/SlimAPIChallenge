@@ -238,6 +238,7 @@ function orderValidation($data){
             }
 
             if($data['total'] != $itemValidation['totalPriceItem']){
+                $validation['status'] = false;
                 $validation['msg']["order"][] = "Invalid total price in Order";
             }
             
