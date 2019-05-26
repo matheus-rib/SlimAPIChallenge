@@ -4,13 +4,54 @@ namespace src\routes;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\QueryException;
+use League\Fractal;
+use League\Fractal\Manager;
+use League\Fractal\Serializer\DataArraySerializer;
 use \App\Models\Order;
 use \App\Models\Item;
 
 // List all orders
 $app->get('/v1/orders', function(Request $resquest, Response $response){
-    $order = Order::all();
-    return $response->withJson($order);
+    // Create a top level instance
+    $manager = new Manager();
+    $manager->setSerializer(new DataArraySerializer());
+    
+    $orders = Order::all();
+    
+    // Pass this object (collection) into a resource, which will also have a "Transformer"
+    $resource = new Fractal\Resource\Collection($orders, function($order){
+        $items = [];
+        foreach ($order->items as $item) {
+            $item->product;
+            $items[] = [
+                'amount' => $item->amount,
+                'price_unit' => $item->price_unit,
+                'total' => $item->total,
+                'product' =>[
+                    'id' => $item->product->id,
+                    'sku' => $item->product->sku,
+                    'name' => $item->product->name
+                ]
+            ];
+        }
+        return [
+            'id' => (int) $order->id,
+            'created_at' => $order->created_at,
+            'cancelDate' => $order->cancelDate ?? NULL,
+            'status' => $order->status,
+            'total' => (float) $order->total,
+            'buyer' => [
+                'id' => $order->customer->id,
+                'name' => $order->customer->name,
+                'cpf' => $order->customer->cpf,
+                'email' => $order->customer->email
+            ],
+            'items' => $items
+        ];
+    });
+    
+    // Turn that into a structured array to be sent as json
+    return $response->withJson($manager->createData($resource)->toArray()['data']);
 });
 
 // Insert a new order
@@ -24,6 +65,7 @@ $app->post('/v1/orders', function(Request $request, Response $response){
             $order->status = $requestedData['status'];
             $order->total = $requestedData['total'];
             $order->customer_id = $customerId;
+            $order->cancelDate = date('Y-m-d H:i:s');
             $order->save();
     
             // Insert order_items for the Order

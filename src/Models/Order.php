@@ -10,4 +10,13 @@ class Order extends Model{
     
     // Add "created_at" and "updated at"
     public $timestamps = true;
+
+    // Relationship
+    public function customer(){
+        return $this->belongsTo('App\Models\Customer');
+    }
+    
+    public function Items(){
+        return $this->hasMany('App\Models\Item');
+    }
 }
