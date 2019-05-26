@@ -1,6 +1,6 @@
 # Slim API
 
-EN_US: SLIM API for a Backend Dev Challenge
+EN_US: SLIM API for a Backend Dev Challenge<br/>
 PT_BR: API SLIM para um desafio de Desenvolvimento em Backend
 ## Prerequisites | Pré-requisitos
 ### EN_US:
@@ -17,24 +17,24 @@ PT_BR: API SLIM para um desafio de Desenvolvimento em Backend
 5. Rode a API usando o comando no terminal no root da pasta do projeto: php -S localhost:8080 -t public public/index.php
 ## Example JSON's and Routes
 ### POST: /v1/products
-EN_US: Insert a new Product in "products" table
-PT_BR: Insere um novo produto na tabela "products"
+EN_US: Insert a new Product in "products" table<br/>
+PT_BR: Insere um novo produto na tabela "products"<br/>
 {
-"sku": 8552515751438644,
-"name": "Casaco Jaqueta Outletdri Inverno Jacquard",
-"price": 109.90
+	"sku": 8552515751438644,
+	"name": "Casaco Jaqueta Outletdri Inverno Jacquard",
+	"price": 109.90
 }
 ### POST: /v1/customers
-EN_US: Insert a new Customer in "customers" table
-PT_BR: Insere um novo Cliente na tabela "customers"
+EN_US: Insert a new Customer in "customers" table<br/>
+PT_BR: Insere um novo Cliente na tabela "customers"<br/>
 {
 "name": "Maria Aparecida de Souza",
 "cpf": "81258705044",
 "email": "mariasouza@email.com"
 }
 ### POST: /v1/orders
-EN_US: Insert a new Order in "orders" table and insert it's Items "order_items" table
-PT_BR: Insere um novo Pedido na tabela "orders" e insere seus itens na tabela "order_items"
+EN_US: Insert a new Order in "orders" table and insert it's Items "order_items" table<br/>
+PT_BR: Insere um novo Pedido na tabela "orders" e insere seus itens na tabela "order_items"<br/>
 {
 "status": "CONCLUDED",
 "total": 189.80,
@@ -68,19 +68,19 @@ PT_BR: Insere um novo Pedido na tabela "orders" e insere seus itens na tabela "o
 ]
 }
 ### PUT: /v1/orders/{order_id}
-EN_US: Set the order's status as "CANCELED" in "orders" table
-PT_BR: Atualiza o status do Pedido como "CANCELED" na tabela "orders"
+EN_US: Set the order's status as "CANCELED" in "orders" table<br/>
+PT_BR: Atualiza o status do Pedido como "CANCELED" na tabela "orders"<br/>
 {
 "order_id": 3,
 "status": "CANCELED"
 }
 ### GET Routes
 #### GET: /v1/products/
-EN_US: Get all products in "products" table
+EN_US: Get all products in "products" table<br/>
 PT_BR: Traz todos produtos da tabela "products"
 #### GET: /v1/customers/
-EN_US: Get all customers in "customers" table
+EN_US: Get all customers in "customers" table<br/>
 PT_BR: Traz todos os clientes da tabela "customers"
 #### GET: /v1/orders/
-EN_US: Get all orders in "orders" table
+EN_US: Get all orders in "orders" table<br/>
 PT_BR: Traz todos pedidos da tabela "orders"
